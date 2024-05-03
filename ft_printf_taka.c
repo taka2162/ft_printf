@@ -4,5 +4,6 @@
 
 int	ft_printf(char const *str, ...)
 {
-	
+	printf("Hello world\n");
+	return (0);
 }
