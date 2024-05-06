@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cimy <cimy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 14:45:26 by cimy              #+#    #+#             */
-/*   Updated: 2024/05/03 15:01:23 by cimy             ###   ########.fr       */
+/*   Created: 2024/05/06 10:45:48 by sshimura          #+#    #+#             */
+/*   Updated: 2024/05/06 14:02:58 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int	main(void)
+ssize_t	ft_putchar(char c)
 {
-	printf("%%");
+	return (write(1, &c, 1));
 }

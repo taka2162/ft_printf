@@ -1,15 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libftprintf.h                                      :+:      :+:    :+:   */
+/*   ft_puts.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cimy <cimy@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 15:07:12 by cimy              #+#    #+#             */
-/*   Updated: 2024/05/03 15:08:05 by cimy             ###   ########.fr       */
+/*   Created: 2024/05/06 10:46:29 by sshimura          #+#    #+#             */
+/*   Updated: 2024/05/06 10:46:57 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "ft_printf.h"
+
+ssize_t	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+		return (0);
+	return (write(1, &*s, ft_strlen(s)));
+}
