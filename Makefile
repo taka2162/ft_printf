@@ -6,20 +6,21 @@
 #    By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 10:44:56 by sshimura          #+#    #+#              #
-#    Updated: 2024/05/06 14:04:59 by sshimura         ###   ########.fr        #
+#    Updated: 2024/05/06 15:52:36 by sshimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libftprintf.a
-# SRCDIR		=	../srcs
-# SRCS		=	$(wildcard $(SRCDIR)/*.c) main.c
-SRCS		=	ft_putnbr.c	ft_strlen.c ft_putchar.c ft_putstr.c ft_printf.c main.c
+LIBFTDIR	=	../libft
+SRCS		=	$*.c $(LIBFTDIR)/*.c
 
 OBJS		=	$(SRCS:%.c=%.o)
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -I
 
 all:	$(NAME)
+
+$(OBJS): %.o:%.c
 
 $(NAME): $(OBJS)
 		ar rcs $(NAME) $(OBJS)
