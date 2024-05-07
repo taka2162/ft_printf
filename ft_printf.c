@@ -6,22 +6,25 @@
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:36:35 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:07:36 by sshimura         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:47:54 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft.h"
 
 int ft_printf(const char *fmt, ...)
 {
 	va_list ap, ap2;
-	int d, i, x, X;
-	unsigned int u;
-	char c, *s;
+	int d;
+	char c, *s, *d_str, *p_ptr;
 	void *p;
+	unsigned int  x, X;
 
 	char ch;
-	int		ret_value = 0;
+
+	d_str = NULL;
+	int ret_value = 0;
 
 	va_start(ap, fmt);
 	va_copy(ap2, ap);
@@ -44,33 +47,48 @@ int ft_printf(const char *fmt, ...)
 			else if (ch == 'p')
 			{
 				p = va_arg(ap, void *);
-				ret_value += ft_putstr(p);
+				if (p == NULL)
+					ret_value += ft_putstr("0x0");
+				else
+				{
+					p_ptr = ft_itoa_base((unsigned long long)p);
+					ret_value += ft_putstr("0x");
+					ret_value += ft_putstr(p_ptr);
+					free(p_ptr);
+				}
 			}
-			else if (ch == 'd') /* int */
+			else if (ch == 'd' || ch == 'i') /* int */
 			{
 				d = va_arg(ap, int);
-				// printf("putnbr: %zd\n", ft_putnbr(d));
-				ret_value += ft_putnbr(d);
-			}
-			else if (ch == 'i')
-			{
-				i = va_arg(ap, int);
-				ret_value += ft_putnbr(i);
+				d_str = ft_itoa(d);
+				ret_value += ft_putstr(d_str);
+				free(d_str);
 			}
 			else if (ch == 'u')
 			{
-				u = va_arg(ap, int);
-				ret_value += ft_putnbr(u);
+				char *u_str = NULL;
+				unsigned int u = va_arg(ap, unsigned int);
+				u_str = ft_unsitoa(u);
+				ret_value += ft_putstr(u_str);
+				free(u_str);
 			}
 			else if (ch == 'x')
 			{
-				x = va_arg(ap, int);
-				ret_value += ft_putnbr(x);
+				x = va_arg(ap, unsigned int);
+				if (x == 0)
+					ret_value += ft_putstr("0");
+				char *x_ptr = ft_itoa_base(x);
+				ret_value += ft_putstr(x_ptr);
+				free(x_ptr);
 			}
 			else if (ch == 'X')
 			{
-				X = va_arg(ap, int);
-				ret_value += ft_putnbr(X);
+				X = va_arg(ap, unsigned int);
+				if (X == 0)
+					ret_value += ft_putstr("0");
+				char *X_ptr = ft_itoa_upbase(X);
+				ret_value += ft_putstr(X_ptr);
+				free(X_ptr);
 			}
 			else if (ch == '%')
 			{
@@ -84,9 +102,6 @@ int ft_printf(const char *fmt, ...)
 		}
 	}
 	va_end(ap);
-	//    ...
-	//    /* use ap2 to iterate over the arguments again */
-	//    ...
 	va_end(ap2);
 	return (ret_value);
 }

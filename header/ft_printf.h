@@ -6,7 +6,7 @@
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 15:07:12 by cimy              #+#    #+#             */
-/*   Updated: 2024/05/06 14:07:45 by sshimura         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:43:29 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void 	foo(char *fmt, ...);
+// void 	foo(char *fmt, ...);
+// static int	ft_int_strlen(unsigned long long n);
+// static void	ft_strrev(char *str);
+char	*ft_itoa_base(unsigned long long value);
+char	*ft_itoa_upbase(unsigned long long value);
+char	*ft_unsitoa(unsigned int n);
 ssize_t	ft_putchar(char c);
 ssize_t	ft_putnbr(int n);
 ssize_t	ft_putstr(char *s);

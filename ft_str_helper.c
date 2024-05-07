@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_str_helper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 10:47:06 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:03:01 by sshimura         ###   ########.fr       */
+/*   Created: 2024/05/06 10:45:48 by sshimura          #+#    #+#             */
+/*   Updated: 2024/05/07 15:48:37 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+ssize_t	ft_putchar(char c)
+{
+	return (write(1, &c, 1));
+}
+
+ssize_t	ft_putstr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (s == NULL)
+	{
+		write(1, "(null)", ft_strlen("(null)"));
+		return (ft_strlen("(null)"));
+	}
+	return (write(1, &*s, ft_strlen(s)));
+}
 
 ssize_t	ft_putnbr(int n)
 {

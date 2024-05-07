@@ -6,7 +6,7 @@
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:36:35 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:03:19 by sshimura         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:40:47 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int ft_printf(char *fmt, ...)
 {
 	va_list ap, ap2;
-	int d, i, x, X;
-	unsigned int u;
+	int d, i;
+	unsigned int u, x, X;
 	char c, *s;
 	void *p;
 
@@ -64,12 +64,12 @@ int ft_printf(char *fmt, ...)
 			}
 			else if (ch == 'x')
 			{
-				x = va_arg(ap, int);
+				x = va_arg(ap, unsigned int);
 				ret_value += ft_putnbr(x);
 			}
 			else if (ch == 'X')
 			{
-				X = va_arg(ap, int);
+				X = va_arg(ap, unsigned int);
 				ret_value += ft_putnbr(X);
 			}
 			else if (ch == '%')
