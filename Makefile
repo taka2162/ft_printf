@@ -6,14 +6,14 @@
 #    By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 10:44:56 by sshimura          #+#    #+#              #
-#    Updated: 2024/05/07 14:57:10 by sshimura         ###   ########.fr        #
+#    Updated: 2024/05/07 16:54:08 by sshimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libftprintf.a
 LIBFT_DIR	=	./libft
 HEADER_DIR	=	./header
-SRCS		=	ft_printf.c ft_str_helper.c helper.c ft_unsitoa.c
+SRCS		=	ft_printf.c ft_str_helper.c helper.c ft_unsitoa.c ft_check_cspdi.c ft_check_uxx_per.c
 SRCS		+= 	$(wildcard $(LIBFT_DIR)/*.c)
 
 OBJS		=	$(SRCS:%.c=%.o)
