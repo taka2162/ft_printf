@@ -6,13 +6,13 @@
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 11:47:30 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/07 15:48:25 by sshimura         ###   ########.fr       */
+/*   Updated: 2024/05/07 19:54:31 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_int_strlen(unsigned long long n)
+static int	cal_16(unsigned long long n)
 {
 	int	len;
 
@@ -55,7 +55,7 @@ char	*ft_itoa_base(unsigned long long value)
 	int		len;
 
 	i = 0;
-	len = ft_int_strlen(value);
+	len = cal_16(value);
 	buf = (char *)malloc(sizeof(char) * (len + 1));
 	if (buf == NULL)
 		return (NULL);
@@ -76,7 +76,7 @@ char	*ft_itoa_upbase(unsigned long long value)
 	int		len;
 
 	i = 0;
-	len = ft_int_strlen(value);
+	len = cal_16(value);
 	buf = (char *)malloc(sizeof(char) * (len + 1));
 	if (buf == NULL)
 		return (NULL);

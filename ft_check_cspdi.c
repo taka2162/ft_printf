@@ -6,12 +6,12 @@
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 15:57:56 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/07 17:02:15 by sshimura         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:45:24 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 ssize_t	check_c(va_list ap)
 {

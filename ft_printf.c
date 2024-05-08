@@ -6,12 +6,11 @@
 /*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 13:36:35 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/07 19:20:32 by sshimura         ###   ########.fr       */
+/*   Updated: 2024/05/07 20:55:14 by sshimura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
 
 int	check_next(char ch, va_list ap)
 {
@@ -42,10 +41,8 @@ int	ft_printf(const char *inner_arg, ...)
 	va_list	ap;
 	char	ch;
 	int		ret_value;
-	int		length;
 
 	ret_value = 0;
-	length = 0;
 	va_start(ap, inner_arg);
 	while (*inner_arg)
 	{
@@ -53,8 +50,7 @@ int	ft_printf(const char *inner_arg, ...)
 		if (ch == '%')
 		{
 			ch = *inner_arg++;
-			length = check_next(ch, ap);
-			ret_value += length;
+			ret_value += check_next(ch, ap);
 		}
 		else
 		{
