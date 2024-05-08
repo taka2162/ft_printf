@@ -6,7 +6,7 @@
 #    By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 10:44:56 by sshimura          #+#    #+#              #
-#    Updated: 2024/05/08 12:37:08 by sshimura         ###   ########.fr        #
+#    Updated: 2024/05/08 13:57:38 by sshimura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,29 +19,20 @@ OBJS		=	$(SRCS:%.c=%.o)
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -I$(HEADER_DIR) -I.
 
-# $(NAME): $(OBJS) $(LIBFT)
-# 		ar rcs $@ $^
-
-# $(NAME): $(OBJS) $(LIBFT)
-# 		ar rcs $@ $(OBJS) $(LIBFT)
-
 $(LIBFT):
 		$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT)
-		ar rcs $@ $^
 		ar -x $(LIBFT)
-		ar rcs $@ $(OBJS)
+		ar rcs $@ $(OBJS) *.o
 
 all:	$(NAME)
-
-# $(LIBFT_DIR)/$(LIBFT): libft
 
 %.o: %.c
 		$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-		rm -f $(OBJS)
+		rm -f $(OBJS) *.o
 		$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean:	clean
