@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:51:33 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:53:37 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/17 17:57:34 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/24 16:29:19 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,29 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*s_ptr;
-	size_t				i;
+	size_t			i;
+	unsigned char	*cast_s;
 
-	s_ptr = (const unsigned char *)s;
 	i = 0;
+	cast_s = (unsigned char *)s;
 	while (i < n)
 	{
-		if (s_ptr[i] == (unsigned char)c)
-			return ((void *)&s_ptr[i]);
+		if (cast_s[i] == (unsigned char)c)
+			return ((void *)&cast_s[i]);
 		i++;
 	}
 	return (NULL);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*ft_s = "abcde";
+// 	char	*s = "abcde";
+// 	char	c = 'd';
+// 	size_t	num = 5;
+// 	printf("ft_戻り値 = %s\n", ft_memchr(ft_s, c, num));
+// 	printf("-------------\n");
+// 	printf("memchr戻り値 = %s\n", memchr(s, c, num));
+// 	return (0);
+// }

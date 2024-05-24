@@ -3,45 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 10:49:03 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:56:05 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/25 13:36:25 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 16:04:41 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned int	ft_int_strlen(const char *str)
-{
-	int	count;
-
-	count = 0;
-	while (str[count] != '\0')
-		count++;
-	return (count);
-}
-
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	i;
-	unsigned int	s_len;
 	char			*result;
+	size_t			s_len;
+	unsigned int	i;
 
-	i = 0;
 	if (s == NULL)
 		return (NULL);
-	if (s[0] == '\0')
-		return (ft_strdup(""));
-	s_len = ft_int_strlen(s);
-	result = (char *)malloc(sizeof(char) * (s_len + 1));
+	s_len = ft_strlen(s);
+	result = (char *)malloc((s_len + 1) * sizeof(char));
 	if (result == NULL)
 		return (NULL);
+	result[s_len] = '\0';
+	i = 0;
 	while (i < s_len)
 	{
 		result[i] = f(i, s[i]);
 		i++;
 	}
-	result[i] = '\0';
 	return (result);
 }
+
+// char	my_func(unsigned int n, char c)
+// {
+// 	return (c + n);
+// }
+
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	char	*s;
+// 	s = ft_strmapi("0000000000", my_func);
+// 	if (s == NULL)
+// 		printf("NULL\n");
+// 	printf("s\t=\t%s\n", s);
+// 	free(s);
+// 	return (0);
+// }

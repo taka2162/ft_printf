@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:52:56 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:52:36 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/16 12:40:42 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/24 13:18:30 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,19 @@
 
 int	ft_isdigit(int c)
 {
-	if (c <= '9' && c >= '0')
+	if ('0' <= c && c <= '9')
 		return (1);
 	else
 		return (0);
 }
+
+// #include <stdio.h>
+// int	main(int argc, char **argv)
+// {
+// 	if (argc != 2)
+// 		return (0);
+// 	if (argv[1][1] != '\0')
+// 		printf("Determine the first character of a string.\n");
+// 	printf("%d\n", ft_isdigit(argv[1][0]));
+// 	return (0);
+// }

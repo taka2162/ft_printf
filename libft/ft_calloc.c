@@ -3,39 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:55:27 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:52:16 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/18 14:50:25 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 14:33:56 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define SIZE 1000000
 
-void	*ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t n, size_t size)
 {
-	unsigned char	*ptr;
-	size_t			total_size;
+	unsigned char	*get;
 	size_t			i;
 
-	if (count == 0 || size == 0)
-		return (malloc(0));
-	if (count < 0 || size < 0)
+	if (n == 0 || size == 0)
+		return (malloc(1));
+	if (n > INT_MAX / size)
 		return (NULL);
-	if (count > SIZE || size > SIZE)
-		return (NULL);
-	if (SIZE_MAX / count < size)
-		return (NULL);
-	total_size = count * size;
-	ptr = (unsigned char *)malloc(sizeof(unsigned char) * total_size);
-	if (ptr == NULL)
+	get = (unsigned char *)malloc(n * size);
+	if (get == NULL)
 		return (NULL);
 	i = 0;
-	while (i < total_size)
+	while (i < n * size)
 	{
-		ptr[i] = 0;
+		get[i] = 0;
 		i++;
 	}
-	return ((void *)ptr);
+	return ((void *)get);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	int	*field;
+// 	int	n;
+// 	int	i;
+
+// 	n = 10;
+// 	field = (int *)ft_calloc(n, sizeof(int));
+// 	if (field == NULL)
+// 	{
+// 		printf("Could not allocate memory.");
+// 		return (0);
+// 	}
+// 	i = 0;
+// 	while (i < n)
+// 	{
+// 		printf("%d", field[i]);
+// 		i++;
+// 	}
+// 	printf("\n");
+// 	free(field);
+// 	return (0);
+// }
+
+// #include <limits.h>
+
+// int main(void){
+// 	int	num = INT_MIN;
+// 	printf("%zu\n", (size_t)num);
+// }
+
+// 18446744073709551615
+// 18446744071562067968

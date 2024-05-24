@@ -3,34 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 15:07:12 by cimy              #+#    #+#             */
-/*   Updated: 2024/05/07 19:22:56 by sshimura         ###   ########.fr       */
+/*   Created: 2024/05/23 12:25:22 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/23 13:43:34 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
+
 # define FT_PRINTF_H
+
+# include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# include <unistd.h>
 
-char	*ft_itoa_base(unsigned long long value);
-char	*ft_itoa_upbase(unsigned long long value);
-char	*ft_unsitoa(unsigned int n);
+int		ft_printf(const char *format, ...);
 ssize_t	ft_putchar(char c);
+ssize_t	ft_putstr(char *str);
+ssize_t	ft_put_pointer(void *p);
 ssize_t	ft_putnbr(int n);
-ssize_t	ft_putstr(char *s);
-size_t	ft_strlen(const char *s);
-int		ft_printf(const char *fmt, ...);
-int		check_next(char ch, va_list ap);
-ssize_t	check_c(va_list ap);
-ssize_t	check_s(va_list ap);
-ssize_t	check_p(va_list ap);
-ssize_t	check_i_d(va_list ap);
-ssize_t	check_u(va_list ap);
-ssize_t	check_x(va_list ap);
-ssize_t	check_up_x(va_list ap);
+ssize_t	ft_putnbr_unsign(unsigned int n);
+ssize_t	ft_put_hexa(unsigned long long x);
+ssize_t	ft_put_upper_hexa(unsigned long long x);
 
 #endif

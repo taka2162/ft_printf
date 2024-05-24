@@ -3,25 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 11:09:48 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/07 11:18:36 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/25 14:51:05 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 16:06:24 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	int	j;
+	size_t		i;
+	size_t		s_len;
 
-	j = 0;
 	if (s == NULL)
 		return ;
-	while (s[j] != '\0')
+	i = 0;
+	s_len = ft_strlen(s);
+	while (s[i] != '\0')
 	{
-		f(j, &s[j]);
-		j++;
+		f(i, &s[i]);
+		i++;
 	}
 }
+
+// #include <stdio.h>
+
+// void	my_func(unsigned int n, char *s)
+// {
+// 	*s += n;
+// }
+
+// int	main(void)
+// {
+// 	char	s[] = "000000";
+
+// 	ft_striteri(s, my_func);
+// 	printf("Modified string: %s\n", s);
+// 	return (0);
+// }

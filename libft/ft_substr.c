@@ -3,33 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 15:16:44 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:56:49 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/24 15:22:07 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 16:01:40 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+static char	*pullout(char *result, char const *s, unsigned int start, size_t n)
 {
-	char	*result;
 	size_t	i;
-	size_t	s_len;
 
-	if (s == NULL)
-		return (NULL);
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-		return (ft_strdup(""));
-	if (len > s_len - start)
-		len = s_len - start;
-	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (result == NULL)
-		return (NULL);
 	i = 0;
-	while (s[start + i] != '\0' && i < len)
+	while (s[start + i] != '\0' && i < n)
 	{
 		result[i] = s[start + i];
 		i++;
@@ -37,3 +25,37 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	result[i] = '\0';
 	return (result);
 }
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*result;
+	size_t	s_len;
+
+	if (s == NULL)
+		return (NULL);
+	s_len = ft_strlen(s);
+	if (s_len <= (size_t)start || len == 0)
+	{
+		result = (char *)malloc(1);
+		result[0] = '\0';
+		return (result);
+	}
+	else if (start + len < s_len)
+		result = (char *)malloc(len + 1);
+	else
+		result = (char *)malloc(s_len - start + 1);
+	if (result == NULL)
+		return (NULL);
+	result = pullout(result, s, start, len);
+	return (result);
+}
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*string;
+// 	string = ft_substr("Hello", 1, 4);
+// 	printf("%s\n", string);
+// 	free(string);
+// 	return (0);
+// }

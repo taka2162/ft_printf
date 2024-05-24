@@ -3,29 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:45:54 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:54:48 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/17 13:27:55 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/30 13:03:03 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *str, int c)
 {
 	int				i;
-	unsigned char	uc;
+	unsigned char	cst_c;
 
+	cst_c = (unsigned char)c;
 	i = 0;
-	uc = (unsigned char)c;
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (s[i] == uc)
-			return ((char *)&s[i]);
+		if (str[i] == cst_c)
+			return ((char *)&str[i]);
 		i++;
 	}
-	if (uc == '\0' || uc > 255)
-		return ((char *)&s[i]);
+	if (cst_c == '\0')
+		return ((char *)&str[i]);
 	return (NULL);
 }
+
+//  #include <stdlib.h>
+//  #include <stdio.h>
+//  int	main(int argc, const char **argv)
+//  {
+//  	if (argc != 3)
+//  		return (0);
+// 	printf("ft_ = %s\n", ft_strchr(argv[1], argv[2][0]));
+// 	printf("strchr = %s\n", strchr(argv[1], argv[2][0]));
+//  	return (0);
+//  }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:39:10 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:56:56 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/16 17:36:02 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/24 13:18:16 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 int	ft_tolower(int c)
 {
-	int	result;
-
-	result = c;
-	if (c <= 'Z' && c >= 'A')
-		result = c + 32;
-	return (result);
+	if ('A' <= c && c <= 'Z')
+		c += 32;
+	return (c);
 }
+
+// #include <stdio.h>
+// int	main(int argc, char **argv)
+// {
+// 	if (argc != 2)
+// 		return (0);
+// 	if (argv[1][1] != '\0')
+// 		printf("Determine the first character of a string.\n");
+// 	printf("%c\n", ft_tolower(argv[1][0]));
+// 	return (0);
+// }

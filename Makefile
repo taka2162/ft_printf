@@ -1,44 +1,27 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/05/06 10:44:56 by sshimura          #+#    #+#              #
-#    Updated: 2024/05/08 13:57:38 by sshimura         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME	=	libftprintf.a
+LIBFT	=	libft.a
+LIBFT_PATH = ./libft/
+SRCS	=	ft_printf.c ft_put_char_str_nbr.c ft_put_hexadecimal.c
+OBJS	=	$(SRCS:%.c=%.o)
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror
 
-NAME		=	libftprintf.a
-LIBFT_DIR	=	./libft
-HEADER_DIR	=	./header
-LIBFT		=	$(LIBFT_DIR)/libft.a
-SRCS		=	ft_printf.c ft_str_helper.c helper.c ft_unsitoa.c ft_check_cspdi.c ft_check_uxx_per.c
-OBJS		=	$(SRCS:%.c=%.o)
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -I$(HEADER_DIR) -I.
+$(NAME):	$(LIBFT) $(OBJS)
+					@if [ ! -f $(NAME) ]; then \
+						cp $(LIBFT_PATH)$(LIBFT) $(NAME); \
+						ar rcs $(NAME) $(OBJS); \
+					fi
 
 $(LIBFT):
-		$(MAKE) -C $(LIBFT_DIR)
+					make -C $(LIBFT_PATH) all
 
-$(NAME): $(OBJS) $(LIBFT)
-		ar -x $(LIBFT)
-		ar rcs $@ $(OBJS) *.o
-
-all:	$(NAME)
-
-%.o: %.c
-		$(CC) $(CFLAGS) -c $< -o $@
+all: $(NAME)
 
 clean:
-		rm -f $(OBJS) *.o
-		$(MAKE) -C $(LIBFT_DIR) clean
-
-fclean:	clean
-		rm -f $(NAME)
-		$(MAKE) -C $(LIBFT_DIR) fclean
-
-re:		fclean all
-
-.PHONY: all clean fclean  re
+				rm -f $(OBJS)
+				make -C $(LIBFT_PATH) clean
+fclean: clean
+				rm -f $(NAME)
+				make -C $(LIBFT_PATH) fclean
+re:
+				fclean all

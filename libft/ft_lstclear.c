@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 15:30:40 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:53:08 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/29 15:30:13 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 16:08:39 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_list	*current;
 	t_list	*next;
+	t_list	*current;
 
 	if (lst == NULL || del == NULL)
 		return ;

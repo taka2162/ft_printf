@@ -3,61 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 13:36:35 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/07 20:55:14 by sshimura         ###   ########.fr       */
+/*   Created: 2024/05/23 12:25:14 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/23 12:25:14 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	check_next(char ch, va_list ap)
+int	see_next(char c, va_list arg)
 {
-	int	length;
+	int	len;
 
-	length = 0;
-	if (ch == 'c')
-		length += check_c(ap);
-	else if (ch == 's')
-		length += check_s(ap);
-	else if (ch == 'p')
-		length += check_p(ap);
-	else if (ch == 'd' || ch == 'i')
-		length += check_i_d(ap);
-	else if (ch == 'u')
-		length += check_u(ap);
-	else if (ch == 'x')
-		length += check_x(ap);
-	else if (ch == 'X')
-		length += check_up_x(ap);
-	else if (ch == '%')
-		length += ft_putchar(ch);
-	return (length);
+	len = 0;
+	if (c == 'c')
+		len += ft_putchar(va_arg(arg, int));
+	else if (c == 's')
+		len += ft_putstr(va_arg(arg, char *));
+	else if (c == 'p')
+		len += ft_put_pointer(va_arg(arg, void *));
+	else if (c == 'd' || c == 'i')
+		len += ft_putnbr(va_arg(arg, int));
+	else if (c == 'u')
+		len += ft_putnbr_unsign(va_arg(arg, unsigned int));
+	else if (c == 'x')
+		len += ft_put_hexa(va_arg(arg, unsigned int));
+	else if (c == 'X')
+		len += ft_put_upper_hexa(va_arg(arg, unsigned int));
+	else if (c == '%')
+		len += ft_putchar(c);
+	return (len);
 }
 
-int	ft_printf(const char *inner_arg, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list	ap;
-	char	ch;
-	int		ret_value;
+	va_list	arg;
+	char	c;
+	int		len;
 
-	ret_value = 0;
-	va_start(ap, inner_arg);
-	while (*inner_arg)
+	va_start(arg, format);
+	len = 0;
+	while (*format)
 	{
-		ch = *inner_arg++;
-		if (ch == '%')
+		c = *format++;
+		if (c == '%')
 		{
-			ch = *inner_arg++;
-			ret_value += check_next(ch, ap);
+			c = *format++;
+			len += see_next(c, arg);
 		}
 		else
 		{
-			ft_putchar(ch);
-			ret_value++;
+			ft_putchar(c);
+			len++;
 		}
 	}
-	va_end(ap);
-	return (ret_value);
+	va_end(arg);
+	return (len);
 }
+
+// #include <stdio.h>
+// #include <limits.h>
+
+// int	main(void)
+// {
+// 	int	len;
+// 	int	num;
+
+// 	len = 0;
+// 	num = 16384;
+// 	ft_printf("\x1b[35mft_printf---\n");
+// 	len += ft_printf("char\t\t=\t%c\n", 'c');
+// 	len += ft_printf("str\t\t=\t%s\n", "str");
+// 	len += ft_printf("pointer\t\t=\t%p\n", &len);
+// 	len += ft_printf("number(d)\t=\t%d\n", num);
+// 	len += ft_printf("number(i)\t=\t%i\n", num);
+// 	len += ft_printf("number(u)\t=\t%u\n", num);
+// 	len += ft_printf("hexa(low) = %x\n", 9223372036854775807LL);
+// 	len += ft_printf("hexa(up)\t=\t%X\n", num);
+// 	ft_printf("percent\t\t=\t%%\n", '%');
+// 	printf("\x1b[mlen = %d\n", len);
+// 	len = 0;
+// 	printf("\x1b[36mprintf---\n");
+// 	len += printf("char\t\t=\t%c\n", 'c');
+// 	len += printf("str\t\t=\t%s\n", "str");
+// 	len += printf("pointer\t\t=\t%p\n", &len);
+// 	len += printf("number(d)\t=\t%d\n", num);
+// 	len += printf("number(i)\t=\t%i\n", num);
+// 	len += printf("number(u)\t=\t%u\n", num);
+// 	len += printf("hexa(low) = %x\n", 9223372036854775807LL);
+// 	len += printf("hexa(up)\t=\t%X\n", num);
+// 	printf("\x1b[mlen = %d\n", len);
+// return (0);
+// }
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q a.out");
+// }

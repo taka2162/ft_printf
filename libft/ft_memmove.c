@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:48:03 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:53:56 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/17 18:31:07 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 15:04:21 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_strncpy(unsigned char *dst, unsigned char *src, size_t len)
+static void	move(unsigned char *dst, const unsigned char *src, size_t n)
 {
 	size_t	i;
 
 	i = 0;
 	if (dst < src)
 	{
-		while (i < len)
+		while (i < n)
 		{
 			dst[i] = src[i];
 			i++;
@@ -27,25 +27,44 @@ static void	ft_strncpy(unsigned char *dst, unsigned char *src, size_t len)
 	}
 	else
 	{
-		while (i < len)
+		while (0 < n)
 		{
-			dst[len - 1] = src[len - 1];
-			len--;
+			dst[n - 1] = src[n - 1];
+			n--;
 		}
 	}
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*dst_ptr;
-	unsigned char	*src_ptr;
-	size_t			i;
+	unsigned char		*cast_dst;
+	const unsigned char	*cast_src;
 
-	dst_ptr = (unsigned char *)dst;
-	src_ptr = (unsigned char *)src;
-	i = 0;
-	if (dst == NULL && src == NULL)
+	cast_dst = (unsigned char *)dest;
+	cast_src = (const unsigned char *)src;
+	if (dest == NULL && src == NULL)
 		return (NULL);
-	ft_strncpy(dst_ptr, src_ptr, len);
-	return ((void *)dst_ptr);
+	move(cast_dst, cast_src, n);
+	return (dest);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	ft_dest[100];
+// 	char	dest[100];
+// 	char	*src = "Hello";
+// 	size_t	num = 1;
+// 	memset(ft_dest, '\0', 100);
+// 	memset(dest, '\0', 100);
+// 	printf("ft_dest = %s\n", ft_dest);
+// 	printf("src = %s\n", src);
+// 	ft_memmove(ft_dest, src, num);
+// 	printf("new ft_dest = %s\n", ft_dest);
+// 	printf("-------------\n");
+// 	printf("dest = %s\n", dest);
+// 	printf("src = %s\n", src);
+// 	memmove(dest, src, num);
+// 	printf("new dest = %s\n", dest);
+// 	return (0);
+// }

@@ -3,80 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 01:01:06 by cimy              #+#    #+#             */
-/*   Updated: 2024/05/07 11:18:15 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/25 13:01:22 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/11 14:05:40 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	digit_count(int n)
+static int	get_digits_itoa(int n)
 {
-	int	count;
+	int	digits;
 
-	count = 0;
-	if (n == 0)
-		return (1);
-	if (n > 0)
+	digits = 0;
+	if (n <= 0)
+		digits++;
+	while (n != 0)
 	{
-		while (n > 0)
-		{
-			n = n / 10;
-			count++;
-		}
+		n /= 10;
+		digits++;
 	}
-	else
-	{
-		while (n < 0)
-		{
-			n = n / 10;
-			count++;
-		}
-	}
-	return (count);
-}
-
-static char	*malloc_memory(int n, int digit)
-{
-	char	*result;
-
-	result = NULL;
-	if (n < 0)
-	{
-		result = (char *)malloc(sizeof(char) * (digit + 2));
-		if (result != NULL)
-		{
-			result[0] = '-';
-			result[digit + 1] = '\0';
-		}
-	}
-	else if (n >= 0)
-	{
-		result = (char *)malloc(sizeof(char) * (digit + 1));
-		if (result != NULL)
-			result[digit] = '\0';
-	}
-	return (result);
+	return (digits);
 }
 
 char	*ft_itoa(int n)
 {
-	int		digit;
 	char	*result;
+	int		digits;
 
-	digit = digit_count(n);
-	result = malloc_memory(n, digit);
+	digits = get_digits_itoa(n);
+	result = (char *)malloc(digits + 1);
 	if (result == NULL)
 		return (NULL);
-	while (digit > 0)
+	result[digits] = '\0';
+	result[0] = '0';
+	if (n == 0)
+		return (result);
+	while (n != 0)
 	{
-		if (n >= 0)
-			result[--digit] = (n % 10) + '0';
+		if (0 < n)
+			result[digits - 1] = '0' + (n % 10);
 		else
-			result[--digit + 1] = -(n % 10) + '0';
-		n = n / 10;
+			result[digits - 1] = '0' - (n % 10);
+		digits--;
+		n /= 10;
 	}
+	if (digits != 0)
+		result[0] = '-';
 	return (result);
 }
+
+// #include <limits.h>
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	char	*n;
+// 	n = ft_itoa(INT_MIN);
+// 	printf("%s\n", n);
+// 	free(n);
+// 	return (0);
+// }

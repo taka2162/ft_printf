@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 21:16:29 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:53:24 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/28 12:41:03 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/28 13:17:17 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*new_node;
+	t_list			*new_node;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = (t_list *)malloc(sizeof(t_list));
 	if (new_node == NULL)
 		return (NULL);
 	new_node->content = content;

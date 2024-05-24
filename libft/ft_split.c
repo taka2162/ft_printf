@@ -3,103 +3,134 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/21 15:37:08 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:54:42 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/25 16:39:39 by ttakino           #+#    #+#             */
+/*   Updated: 2024/05/12 16:04:10 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+static char	**make_str(char const *s, char c)
 {
-	int	i;
-	int	count;
+	char	**result;
+	int		i;
+	int		flag;
+	int		count;
 
 	i = 0;
+	flag = 1;
 	count = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != c && (s[i + 1] == '\0' || s[i + 1] == c))
+		if (s[i] == c)
+			flag = 1;
+		else if (flag == 1)
+		{
+			flag = 0;
 			count++;
+		}
 		i++;
 	}
-	return (count);
-}
-
-static int	ft_strlen_to_c(const char *s, int start, char c)
-{
-	int	len_count;
-
-	len_count = 0;
-	while (s[start] != '\0' && s[start] != c)
-	{
-		len_count++;
-		start++;
-	}
-	return (len_count);
-}
-
-static char	*allocate_memory(int word_len)
-{
-	char	*return_ptr;
-
-	return_ptr = (char *)malloc(sizeof(char) * (word_len + 2));
-	if (return_ptr == NULL)
+	result = (char **)malloc((count + 1) * sizeof(char *));
+	if (result == NULL)
 		return (NULL);
-	return (return_ptr);
+	result[count] = NULL;
+	return (result);
 }
 
-static char	**generate_substrings(char const *s, char **before_split, char c)
+static char	*make_word(char const *s, char c, int start)
 {
-	int	i;
-	int	j;
-	int	word_len;
-	int	indx;
+	char	*str;
+	int		i;
 
 	i = 0;
-	indx = 0;
-	while (s[indx] != '\0')
+	while (s[start + i] != c && s[start + i] != '\0')
+		i++;
+	str = (char *)malloc((i + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	str[i] = '\0';
+	while (0 < i)
 	{
-		while (s[indx] == c)
-			indx++;
-		if (s[indx] == '\0')
-			break ;
-		word_len = ft_strlen_to_c(s, indx, c);
-		before_split[i] = allocate_memory(word_len);
-		j = word_len - 1;
-		while (j >= 0)
-		{
-			before_split[i][j] = s[indx + j];
-			j--;
-		}
-		indx += word_len;
-		before_split[i++][word_len] = '\0';
+		str[i - 1] = s[start + (i - 1)];
+		i--;
 	}
-	return (before_split);
+	return (str);
+}
+
+static char	**free_words(int result_i, char **result)
+{
+	result_i--;
+	while (0 < result_i)
+	{
+		free(result[result_i]);
+		result_i--;
+	}
+	free(result);
+	return (NULL);
+}
+
+static char	**apply_word(char const *s, char c, char **result)
+{
+	int		flag;
+	int		result_i;
+	int		s_i;
+
+	flag = 1;
+	result_i = 0;
+	s_i = 0;
+	while (s[s_i] != '\0')
+	{
+		if (s[s_i] == c || s[s_i] == '\0')
+			flag = 1;
+		else if (flag == 1)
+		{
+			result[result_i] = make_word(s, c, s_i);
+			if (result[result_i] == NULL)
+				return (free_words(result_i, result));
+			else
+			{
+				s_i += ft_strlen(result[result_i++]) - 1;
+				flag = 0;
+			}
+		}
+		s_i++;
+	}
+	return (result);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		word_count;
-	char	**before_split;
+	char	**result;
 
 	if (s == NULL)
 		return (NULL);
-	word_count = count_words(s, c);
-	before_split = (char **)malloc(sizeof(char *) * (word_count + 1));
-	if (before_split == NULL)
-	{
-		free(before_split);
+	result = make_str(s, c);
+	if (result == NULL)
 		return (NULL);
-	}
-	before_split[word_count] = NULL;
-	before_split = generate_substrings(s, before_split, c);
-	if (before_split == NULL)
-	{
-		free(before_split);
+	result = apply_word(s, c, result);
+	if (result == NULL)
 		return (NULL);
-	}
-	return (before_split);
+	return (result);
 }
+
+// int	main(void)
+// {
+// 	char	**split = ft_split("hellozs", 'z');
+// 	int		i = 0;
+// 	while (split[i] != NULL)
+// 	{
+// 		printf("%s\n", split[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (split[i] != NULL)
+// 	{
+// 		free(split[i]);
+// 		i++;
+// 	}
+// 	free(split);
+// 	return (0);
+// }

@@ -3,31 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 10:44:38 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:54:55 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/18 15:37:14 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/29 17:53:06 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *str)
+char	*ft_strdup(const char *string)
 {
+	int		size;
 	char	*result;
-	size_t	str_len;
 	int		i;
 
 	i = 0;
-	str_len = ft_strlen((char *)str);
-	result = (char *)malloc(sizeof(char) * (str_len + 1));
+	size = ft_strlen(string) + 1;
+	result = (char *)malloc(size * sizeof(char));
 	if (result == NULL)
 		return (NULL);
-	while (str[i] != '\0')
+	while (string[i] != '\0')
 	{
-		result[i] = str[i];
+		result[i] = string[i];
 		i++;
 	}
 	result[i] = '\0';
 	return (result);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*string = "Hello!!!";
+
+// 	printf("%s\n", ft_strdup(string));
+// 	return (0);
+// }

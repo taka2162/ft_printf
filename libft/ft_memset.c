@@ -3,26 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 11:47:17 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:54:02 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/17 17:36:28 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/24 13:18:23 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	unsigned char	*b_ptr;
-	size_t			i;
+	char	*cast_s;
+	size_t	i;
 
-	b_ptr = (unsigned char *)b;
 	i = 0;
-	while (i < len)
+	cast_s = (char *)s;
+	while (i < n)
 	{
-		b_ptr[i] = c;
+		cast_s[i] = c;
 		i++;
 	}
-	return ((void *)b_ptr);
+	return (s);
 }
+
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	ft_dest[100];
+// 	char	dest[100];
+// 	char	s = 'a';
+// 	size_t	num = 100;
+// 	ft_memset(ft_dest, s, num);
+// 	printf("ft_dest = %s\n", ft_dest);
+// 	printf("-------------\n");
+// 	memset(dest, s, num);
+// 	printf("dest = %s\n", dest);
+// 	return (0);
+// }

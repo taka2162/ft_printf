@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sshimura <sshimura@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ttakino <ttakino@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 10:35:39 by sshimura          #+#    #+#             */
-/*   Updated: 2024/05/06 14:55:47 by sshimura         ###   ########.fr       */
+/*   Created: 2024/04/16 11:50:20 by ttakino           #+#    #+#             */
+/*   Updated: 2024/04/29 17:52:45 by ttakino          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,15 @@ size_t	ft_strlen(const char *str)
 
 	i = 0;
 	while (str[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
+
+// #include <stdio.h>
+// int	main(int argc, char** argv)
+// {
+// 	if (argc != 2)
+// 		return (0);
+// 	printf("%d\n", ft_strlen(argv[1]));
+// 	return (0);
+// }
